@@ -1,0 +1,125 @@
+
+LẬP TRÌNH RESFUL API
+
+database : realty
+table : land, document,transaction, user
+
+công việc: thanh
+ chuc nang 2: lay danh sach nha dat theo: location, land_disc, price và area
+ chuc nang 6: sap xep tăng dần và giảm dần theo tất cả các column
+
+mô tả sử dụng:
+ các thư mục liên quan trong bài tập:
+ 1. Controller/ApiController
+ 2. Models/Land
+ 3. Services/LandService
+ 4. routes/api.php
+
+ *HÀM 1:  Sắp xếp danh sách tăng dần và giảm dần theo tất cả các column
+
+ hàm thực thi : index()
+    -URI : api/land
+    -METHOD : get
+    *có phân trang , nếu không có giá trị limit thì mặc định limit=2 (có thể thay đổi limit mặc định)
+    -REQUEST : http://localhost:8072/cms/public/api/land?limit=3&page=2
+    kết quả trả về
+    {
+        "land": [
+            {
+                "land_id": 6,
+                "location": "2",
+                "area": 2,
+                "price": 2,
+                "land_disc": "2",
+                "document_id": 4,
+                "for_sale": 1,
+                "owner_id": 1,
+                "updated_at": "1970-01-01T00:00:00.000000Z",
+                "created_at": "2022-04-14T17:00:00.000000Z"
+            }
+        ],
+        "meta": {
+            "total": 4,
+            "perPage": 3,
+            "currentPage": 2
+        }
+    }
+        *sắp xếp tăng dần theo tất cả các column
+        request : http://localhost:8072/cms/public/api/land?limit=4&page=1&column=land_id&sort=desc
+        column: có thể điền tất cả các cột
+        sort : có 2 giá trị desc(giảm dần) và asc(tăng dần)
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\
+* HÀM 2 :lay danh sach nha dat theo: location, land_disc, price và area
+
+hàm thực thi : search()
+ -URI : api/land/search
+    -METHOD : get
+
+    theo price:
+    -REQUEST : http://localhost:8072/cms/public/api/land/search?price=2222222222222222
+    kết quả trả về
+
+[
+    {
+        "land_id": 5,
+        "location": "hanoi",
+        "area": 11222,
+        "price": 2222222222222222,
+        "land_disc": "ở",
+        "document_id": 4,
+        "for_sale": 1,
+        "owner_id": 1,
+        "updated_at": "1970-01-01T00:00:00.000000Z",
+        "created_at": "2022-04-14T17:00:00.000000Z"
+    }
+]
+    theo area : request tương tự đổi 'price' thành 'area'
+
+    theo location:
+    request : http://localhost:8072/cms/public/api/land/search?location=h
+
+    kết quả trả về
+[
+    {
+        "land_id": 3,
+        "location": "hcm",
+        "area": 11222,
+        "price": 1112222,
+        "land_disc": "nhà",
+        "document_id": 2,
+        "for_sale": 1,
+        "owner_id": 2,
+        "updated_at": "1970-01-01T00:00:00.000000Z",
+        "created_at": "2022-04-14T17:00:00.000000Z"
+    },
+    {
+        "land_id": 4,
+        "location": "hcm",
+        "area": 11222,
+        "price": 1222222222222222,
+        "land_disc": "trồng",
+        "document_id": 3,
+        "for_sale": 1,
+        "owner_id": 1,
+        "updated_at": "1970-01-01T00:00:00.000000Z",
+        "created_at": "2022-04-14T17:00:00.000000Z"
+    },
+    {
+        "land_id": 5,
+        "location": "hanoi",
+        "area": 11222,
+        "price": 2222222222222222,
+        "land_disc": "ở",
+        "document_id": 4,
+        "for_sale": 1,
+        "owner_id": 1,
+        "updated_at": "1970-01-01T00:00:00.000000Z",
+        "created_at": "2022-04-14T17:00:00.000000Z"
+    }
+]
+    theo land_disc : cũng tương tự location
+
+
+
+ ***** chú ý : gọi api (/cms/public)
