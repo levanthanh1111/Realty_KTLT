@@ -49,6 +49,6 @@ Route::namespace('App\Http\Controllers\API')->group(function (){
 Route::namespace('App\Http\Controllers\API')->group(function (){
     Route::get('transaction',[TransactionController::class , 'index']);
     Route::post('add-transaction',[TransactionController::class, 'store']);
-    Route::put('delete-transaction/{id1}/{id2}/{id3}',[TransactionController::class, 'destroy']);
-    Route::put('restore-transaction/{id1}/{id2}/{id3}',[TransactionController::class, 'restoreTransaction']);
+    Route::put('delete-transaction/{id}',[TransactionController::class, 'destroy']);
+    Route::put('restore-transaction/{id}',[TransactionController::class, 'restoreTransaction']);
 });

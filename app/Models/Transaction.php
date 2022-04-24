@@ -11,7 +11,7 @@ class Transaction extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'owner_id','buyer_id','land_id','commision_money',
+        'buyer_id','land_id','commision_money',
          'create_at', 'update_at','status'
     ];
     protected $table = 'transaction';
