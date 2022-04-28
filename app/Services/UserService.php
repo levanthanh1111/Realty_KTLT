@@ -7,20 +7,14 @@ use Mockery\Exception;
 class UserService
 {   public function getUser()
     {
-    $users = DB::table('user')->select('user_id', 'name', 'address', 'phone_number', 'email')
-        ->where('status', 1)->get();
-    return response()->json(["users" => $users], 200);
+        $users = DB::table('user')->select('user_id', 'name', 'address', 'phone_number', 'email')
+            ->where('status', 1)->get();
+        return response()->json(["users" => $users], 200);
     }
     public  function getUserId($id){
-        if(empty($id)){
-            $users=DB::table('user')->select('user_id','name','address','phone_number','email')
-                ->where('status',1)->where('user_id',$id)->get();
-            return response()->json(["users"=>$users],200);
-        }else{
-            $users=DB::table('user')->select('user_id','name','address','phone_number','email')
-                ->where('status',1)->where('user_id',$id)->get();
-            return response()->json(["users"=>$users],200);
-        }
+        $users = DB::table('user')->select('user_id', 'name', 'address', 'phone_number', 'email')
+                ->where('status', 1)->where('user_id', $id)->get();
+        return response()->json(["users" => $users], 200);
     }
     public function SoertUser(){
         try{

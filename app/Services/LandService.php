@@ -47,14 +47,36 @@ class LandService
     }
     //tìm kiếm đất theo diện tích
     public function searchArea($data){
+        $a = $data +10;
+        $b = $data -10;
         $result = DB::table('land')->select('land_id','location','area','price','land_disc','owner_id')
-            ->where('area','=',''.$data.'')->get();
+            ->whereBetween('area', [$b , $a])->get();
         return $result;
     }
     //tìm kiếm đất theo giá
     public function searchPrice($data){
+        $a = $data +100;
+        $b = $data -100;
         $result = DB::table('land')->select('land_id','location','area','price','land_disc','owner_id')
-            ->where('price','=',''.$data.'')->get();
+            ->whereBetween('price', [$b , $a])->get();
+        return $result;
+    }
+    // sắp xếp đất theo giá giảm dần
+    public function sortPriceDesc(){
+        $result = DB::select('SELECT land.land_id,land.location,land.area,land.price,land.land_disc,user.name as owner
+                                FROM land,user
+                                WHERE land.owner_id = user.user_id and land.status = 1 land.for_sale = 1
+                                ORDER BY land.price desc'
+        );
+        return $result;
+    }
+    // sắp xếp đất theo giá tăng dần
+    public function sortPriceAsc(){
+        $result = DB::select('SELECT land.land_id,land.location,land.area,land.price,land.land_disc,user.name as owner
+                                FROM land,user
+                                WHERE land.owner_id = user.user_id and land.status = 1 and land.for_sale = 1
+                                ORDER BY land.price asc'
+        );
         return $result;
     }
 }

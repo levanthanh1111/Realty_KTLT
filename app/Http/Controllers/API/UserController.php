@@ -110,7 +110,7 @@ class UserController extends Controller
     // khôi phục user đã xóa
     public function restoreUsers($id){
         User::where('user_id',$id)->update(['status'=>1]);
-        return response()->json(['message'=> 'restoreaaa user success'],202);
+        return response()->json(['message'=> 'restore user success'],202);
     }
     // sắp xếp theo user tăng dần theo sở hữu đất của họ
     public function showUserSortedByLand(){

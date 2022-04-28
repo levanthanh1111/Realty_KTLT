@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\ApiController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\LandController;
 use App\Http\Controllers\API\TransactionController;
@@ -38,6 +37,8 @@ Route::namespace('App\Http\Controllers\API')->group(function (){
     Route::get('land-sale',[LandController::class , 'getBy']);
     Route::get('land-all',[LandController::class , 'getAll']);
     Route::get('land/search', [ LandController::class, 'search']);
+    Route::get('land-sort-desc', [ LandController::class, 'sortLandPriceDesc']);
+    Route::get('land-sort-asc', [ LandController::class, 'sortLandPriceAsc']);
     Route::post('add-land',[LandController::class, 'store']);
     Route::put('update-land/{id}',[LandController::class, 'update']);
     Route::put('delete-land/{id}',[LandController::class, 'destroy']);

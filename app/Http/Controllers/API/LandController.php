@@ -77,4 +77,11 @@ class LandController extends Controller
             ];
         }
     }
+
+    public function sortLandPriceDesc(){
+        return $this->landService->sortPriceDesc();
+    }
+    public function sortLandPriceAsc(){
+        return $this->landService->sortPriceAsc();
+    }
 }
